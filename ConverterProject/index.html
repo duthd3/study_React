@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="root"></div> <!--ReactDOM이 React element들을 가져다 놓을 곳-->
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js
+"></script>
+<script src=https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js></script>    
+<script src=https://unpkg.com/@babel/standalone/babel.min.js></script><!--babel에게 JSX코드를 주면 babel이 브라우저가 읽을 수 있는 코드로변환-->
+<script type = "text/babel">
+
+    const root = document.getElementById("root"); //root를 가져온다.
+    
+ /*   function Title(){//component 렌더링을 위해서는 항상 이름이 대문자여야 한다.
+      return (<h3 id="title" onMouseEnter={()=> console.log("mouse enter")}>
+        Hello I'm a title
+      </h3>
+      );//위와 완전히 동일한 의미의 코드
+  //JSX를 사용하면 코드를 훨씬 간결하게 작성할 수 있다. 보다시피!)
+      
+    }
+      */
+  /*  function Button(){ //component 렌더링을 위해서는 항상 이름이 대문자여야 한다.
+      return(<button
+      style={{
+        backgroundColor:"tomato",
+      }}
+      onClick={()=>console.log("i'm clicked")}
+      >
+      Click me
+    </button>
+     );
+    } 
+    */
+
+    function MinutesToHours() { 
+
+      // setCounter(counter+1);
+      const [amount, setAmount] = React.useState();  
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      }
+      const reset = () => {
+        setAmount(0);
+      }
+      const onFlip = () => {
+        reset();
+        setInverted(current => !current);
+        
+      };
+      return(
+        <div> 
+          
+          <div><label htmlfor="minutes">Minutes</label>
+            <input 
+            value={inverted ? amount*60:amount}
+            id="minutes" 
+            placeholder = "Minute" 
+            type="number" 
+            onChange = {onChange}
+            disabled={inverted}
+            />
+          </div>  
+          
+          <div>
+            <label htmlfor="hours">Hours</label>
+            <input 
+            value={inverted?amount:amount/60} //flip된 상태라면 변환되지 않은 시간, flip이 되지 않은상태라면 minutes
+            id="hours" 
+            placeholder = "Hours" 
+            type="number"
+            disabled = {!inverted}
+            onChange ={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+        </div>
+        );//component의 첫번째 글자는 항상 대문자여야 한다.(Title, Button)
+      }//ReactDOM은 container element들을 root div 안에서 보여주라는 의미.
+    function KmToMiles(){
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      }
+      const reset = () =>{
+        setAmount(0);
+      }
+      const onFlip = () => {
+        reset();
+        setInverted(current => !current);
+      }
+      return(
+        <div>
+          <div>
+            <label htmlfor="km">Kilometers</label>
+            <input
+              value={inverted ? amount*1.6 : amount}
+              id="km"
+              placeholder="Kilometers"
+              type="number"
+              disabled={inverted}
+              onChange = {onChange}
+            >
+            </input>
+          </div>
+
+          <div>
+            <label htmlfor="miles">Miles</label>
+            <input
+            value={inverted?amount : amount*0.6}
+            id="miles"
+            placeholder="Miles"
+            type="number"
+            disabled={!inverted}
+            onChange = {onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+        </div>
+      )
+    }
+    function App() { 
+        //data와 data의 값을 바꿀수있는 함수가 들어있는 배열을 얻는다.
+        //const x=[1,2,3] const a = x[0] const b = x[1] =>const [a, b] = x  a=1, b=2
+        //리렌더링을 알아서 해준다.
+        
+        // setCounter(counter+1);
+        const[index, setIndex] = React.useState("1");
+        const onSelect = (event) =>{
+          setIndex(event.target.value);
+        }
+        console.log("rendered with", index);
+        return(
+          <div> 
+            <h1 className="hi">Super Converter</h1>
+            <select value={index} onChange={onSelect}>
+              <option value="xx">Select yout units </option>
+              <option value="0">Minutes & Hours </option>
+              <option value="1">Km & Miles </option>
+            </select>
+          <hr/>
+            {index ==="xx"? "Please select your units" : null}
+            {index === "0" ? <MinutesToHours /> : null}
+            {index=== "1" ? <KmToMiles /> : null}
+          </div> 
+          );
+        }
+        
+        
+        //data와 data의 값을 바꿀수있는 함수가 들어있는 배열을 얻는다.
+        //const x=[1,2,3] const a = x[0] const b = x[1] =>const [a, b] = x  a=1, b=2
+        //리렌더링을 알아서 해준다.
+        
+      ReactDOM.render(<App />, root);
+    </script>
+    </html>
+    
