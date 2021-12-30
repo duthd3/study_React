@@ -2,10 +2,18 @@ import Button from "./Button";
 import styles from "./App.module.css";
 import { useState, useEffect  } from "react";
 
+
 function App() {
   const[loading, setLoading] = useState(true);
   const[coins, setCoins] = useState([]);//처음에는 빈배열이므로 coin 0개
   const[dollar, setdollar] = useState(0);
+  const[value, setValue] = useState(1);
+  const onChange = (event)=>{
+    setdollar(event.target.value);
+  }
+  const onCng = (event) =>{
+    setValue(event.target.value);
+  }
   useEffect(()=>{
     fetch("https://api.coinpaprika.com/v1/tickers").then((response)=>
     response.json()).then(json=> {
@@ -16,13 +24,21 @@ function App() {
   return(
     <div>
       <h1>The Coins!{loading ? "" : `(${coins.length})`}</h1>
-      {loading ? <strong>Loading...</strong>:<select>
-        {coins.map((coin)=>(
-          <option>
-            {coin.name} ({coin.symbol}): ${coin.quotes.USD.price} USD
-          </option>
-        ))}
-      </select>}
+      {loading ? <strong>Loading...</strong>:
+      <div>
+        <label htmlfor="dollar">dollar</label>
+        <input placeholder="your dollar" onChange = {onChange}></input>
+        <select onChange = {onCng}>
+          {coins.map((coin)=>(
+            <option id={coin.name} value={coin.quotes.USD.price}>
+              {coin.name} ({coin.symbol}): ${coin.quotes.USD.price} USD
+            </option>
+          ))}
+        </select>
+      </div>
+      }
+      <label htmlfor="btc">BTC</label>
+      <input value={dollar/value}></input>
       
 
       
