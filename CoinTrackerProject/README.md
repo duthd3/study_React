@@ -1,6 +1,9 @@
 # CoinTrackerProject
 
-![CoinTracker](https://user-images.githubusercontent.com/79510152/147730669-27bbcf2b-1df3-4124-ada8-f776214d4f18.gif)
+![CoinTracker](https://user-images.githubusercontent.com/79510152/147773518-75ac798b-3c77-44b0-8e4e-64fec40528ea.gif)
+
+- 코인api를 통해 모든 코인 정보를 불러온다.
+- 달러를 입력하면 각 코인을 몇개 구매할 수 있는지 보여준다.
 
 
 # 배운점
