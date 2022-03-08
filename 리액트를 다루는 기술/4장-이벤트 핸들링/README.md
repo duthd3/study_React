@@ -39,3 +39,27 @@ class EventPractice extends Component{
 
 export default EventPractice;
 ```
+
+### 4.2.3 임의 메서드 만들기
+
+### 4.2.4 input 여러개 다루기
+- input이 여러 개일 대는 event 객체를 활용한다.
+- e.target.name 값을 사용한다.(e.target.name은 해당 인풋의 name을 가리킨다.)
+```js
+handleChange=(e)=>{
+        this.setState({
+            [e.target.name]:e.target.value
+        });
+    }
+```
+
+### 4.2.5 onKeyPress 이벤트 핸들링
+- 키를 눌렀을때 발생하는 이벤트이다.
+
+## 4.3 함수형 컴포넌트로 구현해 보기
+- 지금까지 한 작업을 함수형 컴포넌트로 똑같이 구현할 수 있다.
+
+## 4.4 정리
+- 클래스형 컴포넌트로 할 수 있는 대부분의 작업은 함수형 컴포넌트로도 구현할 수 있다.
+- 함수형 컴포넌트에서 여러 개의 인풋 상태를 관리하기 위해 useState에서 form 객체를 사용한다.
+ㅁㅏㄴㄷ
